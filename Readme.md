@@ -1,5 +1,5 @@
 # SecretBlips
-FiveM Script - Make Blips visible an invisible with an Item
+FiveM Script - Make Blips visible with an Item
 
 ## Description
 * You can set the Item you want to use.
