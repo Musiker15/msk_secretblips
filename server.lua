@@ -33,10 +33,10 @@ local resourceName = "\x1b[32m["..GetCurrentResourceName().."]\x1b[0m"
 PerformHttpRequest('https://raw.githubusercontent.com/Musiker15/SecretBlips/main/VERSION', function(Error, NewestVersion, Header)
 	print("\n###############################")
     if CurrentVersion == NewestVersion then
-	    print(resourceName .. 'Resource is Up to Date')
+	    print(resourceName .. ' Resource is Up to Date')
 	    print('## Current Version: ' .. CurrentVersion)
     elseif CurrentVersion ~= NewestVersion then
-        print(resourceName .. 'Resource Outdated. Please Update!')
+        print(resourceName .. ' Resource Outdated. Please Update!')
 	    print('## Newest Version: ' .. NewestVersion)
         print('## Download Newest Version here: https://github.com/Musiker15/SecretBlips/releases')
     end
