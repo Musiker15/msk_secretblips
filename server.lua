@@ -27,18 +27,23 @@ AddEventHandler('esx:onRemoveInventoryItem', function(source, item, count)
 end)
 
 ---- GitHub Updater ----
-local CurrentVersion = '1.0'
-local resourceName = "\x1b[32m["..GetCurrentResourceName().."]\x1b[0m"
+function GetCurrentVersion()
+	return GetResourceMetadata( GetCurrentResourceName(), "version" )
+end
+
+local CurrentVersion = GetCurrentVersion()
+local resourceName = "^2["..GetCurrentResourceName().."]^0"
 
 PerformHttpRequest('https://raw.githubusercontent.com/Musiker15/SecretBlips/main/VERSION', function(Error, NewestVersion, Header)
-	print("\n###############################")
+	print("###############################")
     if CurrentVersion == NewestVersion then
-	    print(resourceName .. ' Resource is Up to Date')
+	    print(resourceName .. ' Resource is Up to Date.')
 	    print('## Current Version: ' .. CurrentVersion)
     elseif CurrentVersion ~= NewestVersion then
         print(resourceName .. ' Resource Outdated. Please Update!')
-	    print('## Newest Version: ' .. NewestVersion)
+	    print('Current Version: ^1' .. CurrentVersion .. '^0')
+	    print('Newest Version: ^2' .. NewestVersion .. '^0')
         print('## Download Newest Version here: https://github.com/Musiker15/SecretBlips/releases')
     end
-	print("###############################\n")
+	print("###############################")
 end)
