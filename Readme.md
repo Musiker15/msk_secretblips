@@ -10,6 +10,7 @@ FiveM Script - Make Blips visible with an Item
 ## Config
 ```
 Config = {}
+Config.Locale = 'de'
 
 Config.Framework = 'ESX' -- Set to 'ESX' or 'QBCore' || If 'nil', the Script won't work.
 
