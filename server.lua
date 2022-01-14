@@ -36,10 +36,10 @@ elseif Config.Framework:match('QBCore') then
 		if not IsEnabled then
 			IsEnabled  = true
 			TriggerClientEvent('SecretBlips:ShowBlipQB', source)
-			TriggerClientEvent(QBCore:Client:Notify, source, _U('add_blip'))
+			TriggerClientEvent('QBCore:Client:Notify', source, _U('add_blip'))
 		else
 			TriggerClientEvent('SecretBlips:RemoveBlipQB', source)
-			TriggerClientEvent(QBCore:Client:Notify, source, _U('remove_blip'))
+			TriggerClientEvent('QBCore:Client:Notify', source, _U('remove_blip'))
 			IsEnabled = false
 		end
 	end)
@@ -52,7 +52,7 @@ elseif Config.Framework:match('QBCore') then
 			if item.name ~= nil and item.name == Config.DrugItem and item.count == 0 then
 				IsEnabled = false
 				TriggerClientEvent('SecretBlips:RemoveBlipQB', source)
-				TriggerClientEvent(QBCore:Client:Notify, source, _U('remove_blip'))
+				TriggerClientEvent('QBCore:Client:Notify', source, _U('remove_blip'))
 			end
 		end)
 	end
