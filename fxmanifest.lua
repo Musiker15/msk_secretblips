@@ -3,7 +3,7 @@ games { 'gta5' }
 
 author 'Musiker15'
 description 'ESX/QBCore SecretBlips'
-version '2.1'
+version '2.2'
 
 client_scripts {
     '@es_extended/locale.lua',
