@@ -3,6 +3,8 @@ FiveM Script - Make Blips visible with an Item
 
 **FiveM Forum:** https://forum.cfx.re/t/release-esx-secretblips-make-blips-visible-with-an-item/4795682
 
+**Discord Support:** https://discord.gg/5hHSBRHvJE
+
 ## Description
 * You can set the Item you want to use.
 * You can set the Blips that you want to show after using the item.
