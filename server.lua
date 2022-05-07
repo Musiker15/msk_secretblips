@@ -32,7 +32,7 @@ elseif Config.Framework:match('QBCore') then
 
 	local IsEnabled = false
 
-	QBCore.Functions.CreateUseableItem(Config.Drugitem, function(source)
+	QBCore.Functions.CreateUseableItem(Config.DrugItem, function(source)
 		if not IsEnabled then
 			IsEnabled  = true
 			TriggerClientEvent('SecretBlips:ShowBlipQB', source)
