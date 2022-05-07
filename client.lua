@@ -44,13 +44,13 @@ if Config.Framework:match('ESX') then
 		end
 	end)
 elseif Config.Framework:match('QBCore') then
-	QBCore = nil 
-	Citizen.CreateThread(function()
+	local QBCore = exports['qb-core']:GetCoreObject()
+	--[[ Citizen.CreateThread(function()
    		while QBCore == nil do
    			TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
    			Citizen.Wait(0)
    		end
-	end)
+	end) ]]
 
 	local state = false
 	local Blips = {}
@@ -90,4 +90,12 @@ elseif Config.Framework:match('QBCore') then
 	end)
 else
 	print('ERROR: Framework not configured in config.lua')
+end
+
+---- Functions ----
+
+function debug(msg)
+	if Config.Debug then
+		print(msg)
+	end
 end
