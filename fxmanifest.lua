@@ -2,12 +2,13 @@ fx_version 'adamant'
 games { 'gta5' }
 
 author 'Musiker15'
-description 'ESX/QBCore SecretBlips'
-version '2.3'
+name 'msk_secretblips'
+description 'Show and delete Blips with an item'
+version '3.0'
 
 shared_scripts {
-	'translation.lua',
-	'config.lua'
+	'config.lua',
+	'translation.lua'
 }
 
 client_scripts {

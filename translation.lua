@@ -2,11 +2,11 @@ Translation = {}
 ----------------------------------------------------------------
 Translation = {
     ['de'] = {
-        ['add_blip'] = 'Drogenkarte aktiviert',
-        ['remove_blip'] = 'Drogenkarte deaktiviert',
+        ['add_blip'] = 'Blips ~g~aktiviert~s~ für ~y~',
+        ['remove_blip'] = 'Blips ~r~deaktiviert~s~ für ~y~',
     },
     ['en'] = {
-        ['add_blip'] = 'Drugmap activated',
-        ['remove_blip'] = 'Drugmap deactivated',
+        ['add_blip'] = 'Blips ~g~activated~s~ for ~y~',
+        ['remove_blip'] = 'Blips ~r~deactivated~s~ for ~y~',
     },
 }
