@@ -1,5 +1,5 @@
-# SecretBlips
-FiveM Script - Make Blips visible with an Item
+# MSK SecretBlips
+Show and delete Blips with an item
 
 **FiveM Forum:** https://forum.cfx.re/t/release-esx-secretblips-make-blips-visible-with-an-item/4795682
 
