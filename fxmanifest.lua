@@ -4,7 +4,7 @@ games { 'gta5' }
 author 'Musiker15'
 name 'msk_secretblips'
 description 'Show and delete Blips with an item'
-version '3.0'
+version '3.1'
 
 shared_scripts {
 	'config.lua',

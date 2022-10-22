@@ -1,4 +1,8 @@
-ESX = exports["es_extended"]:getSharedObject()
+if Config.Framework:match('ESX') then
+	ESX = exports["es_extended"]:getSharedObject()
+elseif Config.Framework:match('QBCore') then
+	QBCore = exports['qb-core']:GetCoreObject()
+end
 
 local Blips = {}
 local timerActive = {}
@@ -26,7 +30,11 @@ AddEventHandler('msk_secretblips:showBlip', function(itemName, blipTable, remove
 			})
 		end
 
-		ESX.ShowNotification(Translation[Config.Locale]['add_blip'] .. itemName)
+		if Config.Framework:match('ESX') then
+			ESX.ShowNotification(Translation[Config.Locale]['add_blip'] .. itemName)
+		elseif Config.Framework:match('QBCore') then
+			QBCore.Functions.Notify(Translation[Config.Locale]['add_blip'] .. itemName, 'primary', 5000)
+		end
 		startTimer(itemName, blipTable)
 	else
 		if not Blips[itemName] then return end
@@ -42,7 +50,12 @@ AddEventHandler('msk_secretblips:showBlip', function(itemName, blipTable, remove
 			debug('STOP Timer')
 			timerActive[itemName] = false
 		end
-		ESX.ShowNotification(Translation[Config.Locale]['remove_blip'] .. itemName)
+
+		if Config.Framework:match('ESX') then
+			ESX.ShowNotification(Translation[Config.Locale]['remove_blip'] .. itemName)
+		elseif Config.Framework:match('QBCore') then
+			QBCore.Functions.Notify(Translation[Config.Locale]['remove_blip'] .. itemName, 'primary', 5000)
+		end
 	end
 end)
 

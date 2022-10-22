@@ -1,22 +1,38 @@
-ESX = exports["es_extended"]:getSharedObject()
+if Config.Framework:match('ESX') then
+	ESX = exports["es_extended"]:getSharedObject()
 
-for k,v in pairs(Config.BlipItems) do
-	ESX.RegisterUsableItem(k, function(source)
-		local src = source
-		local xPlayer = ESX.GetPlayerFromId(src)
-
-		xPlayer.triggerEvent('msk_secretblips:showBlip', k, v)
-	end)
-
-	if Config.RemoveItem then
-		AddEventHandler('esx:onRemoveInventoryItem', function(source, item, count)
+	for k,v in pairs(Config.BlipItems) do
+		ESX.RegisterUsableItem(k, function(source)
 			local src = source
 			local xPlayer = ESX.GetPlayerFromId(src)
-
-			if item == k then
-				xPlayer.triggerEvent('msk_secretblips:showBlip', k, v, true)
-			end
+	
+			xPlayer.triggerEvent('msk_secretblips:showBlip', k, v)
 		end)
+	
+		if Config.RemoveItem then
+			AddEventHandler('esx:onRemoveInventoryItem', function(source, item, count)
+				local src = source
+				local xPlayer = ESX.GetPlayerFromId(src)
+	
+				if item == k then
+					xPlayer.triggerEvent('msk_secretblips:showBlip', k, v, true)
+				end
+			end)
+		end
+	end
+elseif Config.Framework:match('QBCore') then
+	QBCore = exports['qb-core']:GetCoreObject()
+
+	for k,v in pairs(Config.BlipItems) do
+		QBCore.Functions.CreateUseableItem(k, function(source)
+			local Player = QBCore.Functions.GetPlayer(source)
+
+			TriggerClientEvent('msk_secretblips:showBlip', source, k, v)
+		end)
+
+		if Config.RemoveItem then
+			-- Add your own Code here
+		end
 	end
 end
 

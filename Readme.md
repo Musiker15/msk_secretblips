@@ -18,12 +18,14 @@ Config.Locale = 'de'
 Config.VersionChecker = true
 Config.Debug = true
 ----------------------------------------------------------------
-Config.RemoveItem = true -- Set this to 'false' if you don't want to remove blips after you removed the item from your inventory.
+Config.Framework = 'ESX' -- Set to 'ESX' or 'QBCore'
 ----------------------------------------------------------------
+Config.RemoveItem = true -- Set this to 'false' if you don't want to remove blips after you removed the item from your inventory.
+
 Config.EnableBlipTime = true -- Set to 'true' if you want to remove blips after time.
 Config.BlipTime = 10 -- in seconds // After this time the blips will be removed.
 ----------------------------------------------------------------
-Config.BlipItems = { -- Add as many as you want
+Config.BlipItems = {
 	['drug_map'] = { -- Itemname
 		{x = -2018.96, y = 2838.15, z = 32.81, display = "Blip1", blip = 51, color = 5, scale = 0.8},
 		{x = -2018.96, y = 2858.15, z = 32.81, display = "Blip1", blip = 51, color = 5, scale = 0.8},
@@ -39,4 +41,4 @@ Config.BlipItems = { -- Add as many as you want
 ```
 
 ## Requirements
-* ESX 1.2 or above
+* ESX 1.2 and above or QBCore
