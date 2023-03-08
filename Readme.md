@@ -10,35 +10,77 @@
 * You can set the Blips that you want to show after using the item.
 * Blips will be removed if you drop the item.
 
-## Config
+## Setup for QBCore
+* Go to `qb-inventory/server/main.lua` and search for `function RemoveItem`
+* Add the following `TriggerEvent()` before every `return true`
+```lua
+TriggerEvent('msk_secretblips:onRemoveItem', Player.PlayerData.source, item, amount)
 ```
-Config = {}
-----------------------------------------------------------------
-Config.Locale = 'de'
-Config.VersionChecker = true
-Config.Debug = true
-----------------------------------------------------------------
-Config.Framework = 'ESX' -- Set to 'ESX' or 'QBCore'
-----------------------------------------------------------------
-Config.RemoveItem = true -- Set this to 'false' if you don't want to remove blips after you removed the item from your inventory.
+<details>
+<summary>If you don't get it then look at this Code</summary>
+```lua
+local function RemoveItem(source, item, amount, slot)
+	local Player = QBCore.Functions.GetPlayer(source)
 
-Config.EnableBlipTime = true -- Set to 'true' if you want to remove blips after time.
-Config.BlipTime = 10 -- in seconds // After this time the blips will be removed.
-----------------------------------------------------------------
-Config.BlipItems = {
-	['drug_map'] = { -- Itemname
-		{x = -2018.96, y = 2838.15, z = 32.81, display = "Blip1", blip = 51, color = 5, scale = 0.8},
-		{x = -2018.96, y = 2858.15, z = 32.81, display = "Blip1", blip = 51, color = 5, scale = 0.8},
-	},
-	['drug_map2'] = { -- Itemname
-		{x = -2076.72, y = 2870.98, z = 32.81, display = "Blip2", blip = 51, color = 2, scale = 0.8},
-		{x = -2076.72, y = 2893.98, z = 32.81, display = "Blip2", blip = 51, color = 2, scale = 0.8},
-	},
-	['drug_map3'] = { -- Itemname
-		{x = -2103.81, y = 2886.16, z = 32.81, display = "Blip3", blip = 51, color = 3, scale = 0.8},
-	},
-}
+	if not Player then return false end
+
+	amount = tonumber(amount) or 1
+	slot = tonumber(slot)
+
+	if slot then
+		if Player.PlayerData.items[slot].amount > amount then
+			Player.PlayerData.items[slot].amount = Player.PlayerData.items[slot].amount - amount
+			Player.Functions.SetPlayerData("items", Player.PlayerData.items)
+
+			if not Player.Offline then
+				TriggerEvent('qb-log:server:CreateLog', 'playerinventory', 'RemoveItem', 'red', '**' .. GetPlayerName(source) .. ' (citizenid: ' .. Player.PlayerData.citizenid .. ' | id: ' .. source .. ')** lost item: [slot:' .. slot .. '], itemname: ' .. Player.PlayerData.items[slot].name .. ', removed amount: ' .. amount .. ', new total amount: ' .. Player.PlayerData.items[slot].amount)
+			end
+			
+			TriggerEvent('msk_secretblips:onRemoveItem', Player.PlayerData.source, item, amount)
+			return true
+		elseif Player.PlayerData.items[slot].amount == amount then
+			Player.PlayerData.items[slot] = nil
+			Player.Functions.SetPlayerData("items", Player.PlayerData.items)
+
+			if Player.Offline then return true end
+
+			TriggerEvent('qb-log:server:CreateLog', 'playerinventory', 'RemoveItem', 'red', '**' .. GetPlayerName(source) .. ' (citizenid: ' .. Player.PlayerData.citizenid .. ' | id: ' .. source .. ')** lost item: [slot:' .. slot .. '], itemname: ' .. item .. ', removed amount: ' .. amount .. ', item removed')
+			TriggerEvent('msk_secretblips:onRemoveItem', Player.PlayerData.source, item, amount)
+			return true
+		end
+	else
+		local slots = GetSlotsByItem(Player.PlayerData.items, item)
+		local amountToRemove = amount
+
+		if not slots then return false end
+
+		for _, _slot in pairs(slots) do
+			if Player.PlayerData.items[_slot].amount > amountToRemove then
+				Player.PlayerData.items[_slot].amount = Player.PlayerData.items[_slot].amount - amountToRemove
+				Player.Functions.SetPlayerData("items", Player.PlayerData.items)
+
+				if not Player.Offline then
+					TriggerEvent('qb-log:server:CreateLog', 'playerinventory', 'RemoveItem', 'red', '**' .. GetPlayerName(source) .. ' (citizenid: ' .. Player.PlayerData.citizenid .. ' | id: ' .. source .. ')** lost item: [slot:' .. _slot .. '], itemname: ' .. Player.PlayerData.items[_slot].name .. ', removed amount: ' .. amount .. ', new total amount: ' .. Player.PlayerData.items[_slot].amount)
+				end
+				TriggerEvent('msk_secretblips:onRemoveItem', Player.PlayerData.source, item, amount)
+				return true
+			elseif Player.PlayerData.items[_slot].amount == amountToRemove then
+				Player.PlayerData.items[_slot] = nil
+				Player.Functions.SetPlayerData("items", Player.PlayerData.items)
+
+				if Player.Offline then return true end
+
+				TriggerEvent('qb-log:server:CreateLog', 'playerinventory', 'RemoveItem', 'red', '**' .. GetPlayerName(source) .. ' (citizenid: ' .. Player.PlayerData.citizenid .. ' | id: ' .. source .. ')** lost item: [slot:' .. _slot .. '], itemname: ' .. item .. ', removed amount: ' .. amount .. ', item removed')
+				TriggerEvent('msk_secretblips:onRemoveItem', Player.PlayerData.source, item, amount)
+				return true
+			end
+		end
+	end
+	return false
+end
 ```
+</details>
+
 
 ## Requirements
 * ESX 1.2 and above or QBCore

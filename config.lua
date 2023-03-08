@@ -4,11 +4,12 @@ Config.Locale = 'de'
 Config.VersionChecker = true
 Config.Debug = true
 ----------------------------------------------------------------
-Config.Framework = 'ESX' -- Set to 'ESX' or 'QBCore'
+Config.Framework = 'QBCore' -- Set to 'ESX' or 'QBCore'
 ----------------------------------------------------------------
+-- Please read the Readme.md if you use QBCore and want to use this function
 Config.RemoveItem = true -- Set this to 'false' if you don't want to remove blips after you removed the item from your inventory.
-
-Config.EnableBlipTime = true -- Set to 'true' if you want to remove blips after time.
+----------------------------------------------------------------
+Config.EnableBlipTime = false -- Set to 'true' if you want to remove blips after time.
 Config.BlipTime = 10 -- in seconds // After this time the blips will be removed.
 ----------------------------------------------------------------
 Config.BlipItems = {
