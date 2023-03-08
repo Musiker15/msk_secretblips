@@ -18,7 +18,6 @@ TriggerEvent('msk_secretblips:onRemoveItem', Player.PlayerData.source, item, amo
 ```
 <details>
 <summary>If you don't get it then look at this Code</summary>
-	```lua
 	local function RemoveItem(source, item, amount, slot)
 		local Player = QBCore.Functions.GetPlayer(source)
 
@@ -78,7 +77,6 @@ TriggerEvent('msk_secretblips:onRemoveItem', Player.PlayerData.source, item, amo
 		end
 		return false
 	end
-	```
 </details>
 
 
